@@ -2908,7 +2908,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end)
 
 			UserInputService.InputBegan:Connect(function(input, processed)
-				if CheckingForKey and input ~= '' then
+				if CheckingForKey and KeybindSettings.CurrentKeybind ~= '' then
 					if input.KeyCode ~= Enum.KeyCode.Unknown then
 						local SplitMessage = string.split(tostring(input.KeyCode), ".")
 						local NewKeyNoEnum = SplitMessage[3]
