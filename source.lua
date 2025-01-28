@@ -2908,9 +2908,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end)
 
 			UserInputService.InputBegan:Connect(function(input, processed)
-				if KeybindSettings.CurrentKeybind == "" then
-					return
-				end
 				if CheckingForKey or KeybindSettings.CurrentKeybind then
 					if input.KeyCode ~= Enum.KeyCode.Unknown then
 						local SplitMessage = string.split(tostring(input.KeyCode), ".")
@@ -2926,7 +2923,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 							KeybindSettings.Callback(tostring(NewKeyNoEnum))
 						end
 					end
-				elseif not KeybindSettings.CallOnChange and KeybindSettings.CurrentKeybind ~= nil and (input.KeyCode == Enum.KeyCode[KeybindSettings.CurrentKeybind] and not processed) then -- Test
+				elseif not KeybindSettings.CallOnChange and KeybindSettings.CurrentKeybind ~= nil and KeybindSettings.CurrentKeybind ~= "" and (input.KeyCode == Enum.KeyCode[KeybindSettings.CurrentKeybind] and not processed) then -- Test
 					local Held = true
 					local Connection
 					Connection = input.Changed:Connect(function(prop)
