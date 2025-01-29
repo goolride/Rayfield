@@ -2918,12 +2918,13 @@ function RayfieldLibrary:CreateWindow(Settings)
 						if not KeybindSettings.Ext then
 							SaveConfiguration()
 						end
-
+			
 						if KeybindSettings.CallOnChange then
 							KeybindSettings.Callback(tostring(NewKeyNoEnum))
 						end
 					end
-				elseif not KeybindSettings.CallOnChange and KeybindSettings.CurrentKeybind ~= nil or KeybindSettings.CurrentKeybind ~= "" and (input.KeyCode == Enum.KeyCode[KeybindSettings.CurrentKeybind] and not processed) then -- Test
+				-- Added check for empty string here: "and KeybindSettings.CurrentKeybind ~= "" "
+				elseif not KeybindSettings.CallOnChange and KeybindSettings.CurrentKeybind ~= nil and KeybindSettings.CurrentKeybind ~= "" and (input.KeyCode == Enum.KeyCode[KeybindSettings.CurrentKeybind] and not processed) then
 					local Held = true
 					local Connection
 					Connection = input.Changed:Connect(function(prop)
@@ -2932,7 +2933,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 							Held = false
 						end
 					end)
-
+			
 					if not KeybindSettings.HoldToInteract then
 						local Success, Response = pcall(KeybindSettings.Callback)
 						if not Success then
