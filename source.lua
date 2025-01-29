@@ -2923,8 +2923,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 							KeybindSettings.Callback(tostring(NewKeyNoEnum))
 						end
 					end
-				-- Added check for empty string here: "and KeybindSettings.CurrentKeybind ~= "" "
-				elseif not KeybindSettings.CallOnChange and KeybindSettings.CurrentKeybind ~= nil and KeybindSettings.CurrentKeybind ~= "" and (input.KeyCode == Enum.KeyCode[KeybindSettings.CurrentKeybind] and not processed) then
+				elseif not KeybindSettings.CallOnChange and KeybindSettings.CurrentKeybind ~= nil and (input.KeyCode == Enum.KeyCode[KeybindSettings.CurrentKeybind] and not processed) then
 					local Held = true
 					local Connection
 					Connection = input.Changed:Connect(function(prop)
